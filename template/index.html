@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v=1">
+    <title>Sentiment Analysis App</title>
+</head>
+<body>
+    <div class="split left">
+        <img src="{{ url_for('static', filename='products/headphone.jpeg') }}" alt="">
+    </div>
+
+    <div class="split right">
+        <h2>Reviews Summary</h2>
+        <p>Positive Reviews: {{ data['positive'] }}</p>
+        <p>Negative Reviews: {{ data['negative'] }}</p>
+        <div>
+            <form method="post">
+                <textarea name="text"></textarea>
+                <input type="submit">
+            </form>
+        </div>
+        <div class="comment-bottom bg-white p-2 px-4">
+            {% for review in data.reviews%}
+            <hr/>
+                <div class="commented-section mt-2">
+                    <div class="d-flex flex-row align-items-center commented-user">
+
+                    </div>
+                    <div class="text-nowrap bd-highlight"><span>{{review}}</span></div>
+                </div>
+            <hr/>
+            {% endfor %}
+        </div>
+
+        
+    </div>
+</body>
+</html>
