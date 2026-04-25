@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from pred_pipeline import preprocessing, vectorizer, get_prediction
 
-
-
 app = Flask(__name__)
 
 
@@ -10,9 +8,6 @@ app = Flask(__name__)
 reviews = []
 positive = 0
 negative = 0
-
-
-
 
 @app.route("/")
 def index():
@@ -31,7 +26,7 @@ def post():
 
     text = request.form['text']
     preprocessed_txt = preprocessing(text)
-    vectorized_txt = vectorizer(preprocessed_txt,tokens)
+    vectorized_txt = vectorizer(preprocessed_txt)
     prediction = get_prediction(vectorized_txt)
     
 

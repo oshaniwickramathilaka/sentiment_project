@@ -1,40 +1,76 @@
+<!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v=1">
     <title>Sentiment Analysis App</title>
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+
+    <!-- Left Panel -->
     <div class="split left">
-        <img src="{{ url_for('static', filename='products/headphone.jpeg') }}" alt="">
+        <div class="product-img-wrap">
+            <img src="{{ url_for('static', filename='products/headphone.jpeg') }}" alt="Headphone">
+        </div>
+        <div class="product-info">
+            
+            <h1>Studio Headphones</h1>
+            <span class="rating">⭐ Customer Sentiment</span>
+        </div>
     </div>
 
+    <!-- Right Dashboard -->
     <div class="split right">
-        <h2>Reviews Summary</h2>
-        <p>Positive Reviews: {{ data['positive'] }}</p>
-        <p>Negative Reviews: {{ data['negative'] }}</p>
-        <div>
+
+        <div class="page-header">
+            <h2>Review Summary</h2>
+            <span class="date" id="today"></span>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card pos">
+                <div class="stat-icon">👍</div>
+                <div class="stat-info">
+                    <p>Positive</p>
+                    <span>{{ data['positive'] }}</span>
+                </div>
+            </div>
+            <div class="stat-card neg">
+                <div class="stat-icon">👎</div>
+                <div class="stat-info">
+                    <p>Negative</p>
+                    <span>{{ data['negative'] }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>Submit a Review</label>
             <form method="post">
-                <textarea name="text"></textarea>
-                <input type="submit">
+                <textarea name="text" rows="3" placeholder="Share your experience with this product…"></textarea>
+                <div class="form-footer">
+                    <button type="submit">Post Review →</button>
+                </div>
             </form>
         </div>
-        <div class="comment-bottom bg-white p-2 px-4">
-            {% for review in data.reviews%}
-            <hr/>
-                <div class="commented-section mt-2">
-                    <div class="d-flex flex-row align-items-center commented-user">
 
-                    </div>
-                    <div class="text-nowrap bd-highlight"><span>{{review}}</span></div>
-                </div>
-            <hr/>
-            {% endfor %}
+        <div class="reviews-header">
+            <p>All Reviews</p>
+            <span class="count">{{ data.reviews | length }}</span>
         </div>
 
-        
+        {% for review in data.reviews %}
+        <div class="review-item">
+            <div class="review-dot"></div>
+            <span>{{ review }}</span>
+        </div>
+        {% endfor %}
+
     </div>
+
+    
+
 </body>
 </html>

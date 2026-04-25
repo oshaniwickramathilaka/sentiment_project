@@ -64,7 +64,7 @@ def get_prediction(vectorized_txt):
 
     
     if pred_value == 1:
-        return 'positive'
-    else:
         return 'negative'
+    else:
+        return 'positive'
     
